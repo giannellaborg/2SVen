@@ -1,17 +1,17 @@
+// [START svenMain]
 function svenMain() {
-  var talkingSub, talkingAdd;
 
   // Call the getLatest2SVResults function and save to results array
   var results = getLatest2SVResults();
 
-  //Logger.log(results);
+  //Logger.log("results: ", results);
 
   // Split results
   var resultsSub = results[0];
   var resultsAdd = results[1];
   var resultsStat = results[2];
 
-  // If getLatest2SVResults shows that any employees are no longer enrolled:
+  // If getLatest2SVResults returns results that any employees are no longer enrolled:
   if (resultsSub.length > 0) {
     var subMessage = compileSubMessage(resultsSub, resultsStat);
     svenMailer(subMessage);
@@ -118,7 +118,18 @@ function getLatest2SVResults() {
 // [START compileSubMessage]
 function compileSubMessage(resultsSub, resultsStat) {
   // Start compiling Slack message
-  var subMessage = "Ugh! Elvis just left the 2SV building, and so did:\n";
+  //var subMessage = "Ugh! Elvis just left the 2SV building, and so did:\n";
+  var subArray = [
+    "Ugh! Elvis just left the 2SV building, and so did:\n",
+    "Sad doesn't even begin to describe it\n",
+    "Was it something that I said, old friend?\n",
+    "Well I guess not everyone likes carrot cake. So long old friend!\n",
+    "If I am really a part of your dream, you’ll come back one day to 2SV land :broken_heart:\n"
+  ];
+
+  Logger.log(addMessage);
+
+  var subMessage = subArray[Math.floor(Math.random() * subArray.length)];
 
   // For every item in result:
   for (var i = 0; i < resultsSub.length; i++) {
@@ -130,7 +141,6 @@ function compileSubMessage(resultsSub, resultsStat) {
   }
   // Compile stats
   subMessage = subMessage + "2SV adoption status is now: " + resultsStat + "% :chart_with_downwards_trend:";
-  //Logger.log(talkingSub);
   return (subMessage);
 
 }
@@ -140,7 +150,18 @@ function compileSubMessage(resultsSub, resultsStat) {
 function compileAddMessage(resultsAdd, resultsStat) {
 
   // Start compiling Slack message
-  addMessage = "Look who just joined the 2SV dream team:\n";
+  //addMessage = "Look who just joined the 2SV dream team:\n";
+  var addArray = [
+    "Look who just joined the 2SV dream team:\n",
+    "Not all heroes wear capes; some enable 2SV, just like:\n",
+    "The two best things in the world are carrots :carrot: and people with enabled 2SV.\n",
+    "2SVengers assemble! Our latest recruit, today:\n",
+    "Done; and DONE!\n"
+  ];
+
+  Logger.log(addMessage);
+
+  var addMessage = addArray[Math.floor(Math.random() * addArray.length)];
 
   // for every item in result:
   for (var i = 0; i < resultsAdd.length; i++) {
