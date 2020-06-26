@@ -1,5 +1,9 @@
+// [INTRO]
+// If this is a first-time run, before you begin make sure all prerequisites have been met. A detailed documentation is available on this project's GitHub README.md file.
+
 // [START svenMain]
 function svenMain() {
+  Logger.log('Init new execution.');
 
   // Call the getLatest2SVResults function and save to results array
   var results = getLatest2SVResults();
@@ -21,11 +25,16 @@ function svenMain() {
     var addMessage = compileAddMessage(resultsAdd, resultsStat);
     svenMailer(addMessage);
   }
+
+  Logger.log('Execution completed.');
 }
 // [END svenMain]
 
 // [ START getLatest2SVResults]
 function getLatest2SVResults() {
+  
+  var DOMAIN = PropertiesService.getScriptProperties().getProperty('DOMAIN');
+  var SPREADSHEET_ID = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
 
   var pageToken;
   var page;
@@ -41,7 +50,7 @@ function getLatest2SVResults() {
 
   do {
     page = AdminDirectory.Users.list({
-      domain: 'leovegas.com',
+      domain: DOMAIN,
       orderBy: 'givenName',
       maxResults: 500,
       query: 'isSuspended=FALSE',
@@ -72,7 +81,7 @@ function getLatest2SVResults() {
   if (rows.length > 0) {
 
     //Compile spreadsheet
-    var spreadsheet = SpreadsheetApp.openById("1J_jozmRSkUoJ-Wd1OsybwCOyGt6lgfEeJ2xw07bbePc");
+    var spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = spreadsheet.getActiveSheet();
 
     var formulaSubtractRange = sheet.getRange("C:C");
@@ -124,7 +133,8 @@ function compileSubMessage(resultsSub, resultsStat) {
     "Sad doesn't even begin to describe it\n",
     "Was it something that I said, old friend?\n",
     "Well I guess not everyone likes carrot cake. So long old friend!\n",
-    "If I am really a part of your dream, you’ll come back one day to 2SV land :broken_heart:\n"
+    "If I am really a part of your dream, you’ll come back one day to 2SV land :broken_heart:\n",
+    "Oof. I guess I'll need to find a new skinny dipping companion\n"
   ];
 
   Logger.log(addMessage);
@@ -156,7 +166,8 @@ function compileAddMessage(resultsAdd, resultsStat) {
     "Not all heroes wear capes; some enable 2SV, just like:\n",
     "The two best things in the world are carrots :carrot: and people with enabled 2SV.\n",
     "2SVengers assemble! Our latest recruit, today:\n",
-    "Done; and DONE!\n"
+    "Done; and DONE!\n",
+    "Wooohoo! Reindeer's got a new 2SV friend, and that's our pal:\n"
   ];
 
   Logger.log(addMessage);
@@ -175,15 +186,14 @@ function compileAddMessage(resultsAdd, resultsStat) {
 
   // Compile stats
   addMessage = addMessage + "2SV adoption status is now: " + resultsStat + "% :chart_with_upwards_trend:";
-  //Logger.log(talkingAdd);
   return (addMessage);
 
 }
 // [END compileAddMessage]
 
 function svenMailer(body) {
-
-  var url = "https://hooks.slack.com/services/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";
+  var SLACK_HOOK = PropertiesService.getScriptProperties().getProperty('SLACK_HOOK')
+  //var url = SLACK_HOOK;
 
   var payload = {
     //"channel" : "#test", // <-- optional parameter, use if you want to override default channel
@@ -194,15 +204,15 @@ function svenMailer(body) {
   }
 
 
-  sendToSlack_(url, payload);
+  sendToSlack_(SLACK_HOOK, payload);
 }
 
 
-function sendToSlack_(url, payload) {
+function sendToSlack_(SLACK_HOOK, payload) {
   var options = {
     "method": "post",
     "contentType": "application/json",
     "payload": JSON.stringify(payload)
   };
-  return UrlFetchApp.fetch(url, options)
+  return UrlFetchApp.fetch(SLACK_HOOK, options)
 }
