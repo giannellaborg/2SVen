@@ -1,6 +1,6 @@
 # ²SVen
 
-²SVen stands for '2-Step Verifications: enabled notifications'. It is a simple Slack Webhook service, written in Google Apps Script (gs) that posts updates in a Slack channel regarding changes to 2-Step Verification (2SV) enrollments in GSuite.
+²SVen stands for '2-Step Verification enrollment notifications'. It is a simple Slack Webhook service, written in Google Apps Script (gs) that posts updates in a Slack channel regarding changes to 2-Step Verification (2SV) enrollments in GSuite.
 
 ## Summary
 
