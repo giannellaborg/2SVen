@@ -18,9 +18,9 @@ Before you run 2SVen you need to have these things in order:
 
 - Copy both gs files in a new Google App Script project, and save them.
 - Create a new Google Drive spreadsheet, ensure the user who will be running the script also has access to read and edit the spreadsheet.
-- Copy the Spreadsheet ID to the GAS global variables using the name 'SPREADSHEET_ID' from File -> Project Properties -> Script Properties
-- Create a [Slack Webhook](https://api.slack.com/messaging/webhooks) on your Slack Workspace, call it 2SVen and copy the hook url to the GAS global variables as 'SLACK_HOOK'
-- Create a new GAS global variable using the name 'DOMAIN' and add the value of the Google Domain in question.
+- Copy the Spreadsheet ID to the GAS global variables using the name `SPREADSHEET_ID` from File -> Project Properties -> Script Properties
+- Create a [Slack Webhook](https://api.slack.com/messaging/webhooks) on your Slack Workspace, call it 2SVen and copy the hook url to the GAS global variables as `SLACK_HOOK`
+- Create a new GAS global variable using the name `DOMAIN` and add the value of the Google Domain in question.
 - Under Resources -> Advanced Google Services, enable the 'Admin Directory API' service (make sure your domain admins have given you API permissions).
 - Run **2Sven-init.gs**, you will be asked to allow google to access/post data on your behalf. It is a normal one-time permission request.
 - 2SVen-init will prepare the Google Spreadsheet for first time run.
