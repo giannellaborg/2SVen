@@ -10,7 +10,7 @@
   - *Hosted: DOMAIN.com Google App Script*
   - *Trigger: Time Driven; Minutes Every 10 minutes*
 - **2SVen-init.gs** - Is an assistant script used only for first-time run.
-- **2SVen Workings.spreadsheet** - The spreadsheet is located on the leovegas.com domain and in Giannella's personal Drive. This sheet is used as a backend to the service for correlating results.
+- **2SVen Workings.spreadsheet** - The spreadsheet should be located on the G Suite domain on a Drive folder accessible by the account running the script. This sheet is used as a backend to the service for correlating results.
 
 ### Before you run 2SVen for the first time
 
